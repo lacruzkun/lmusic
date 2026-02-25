@@ -1,0 +1,114 @@
+:root {
+  --playback-height: 100px;
+  --nav-width: 150px;
+  --nav-button-height: 50px;
+  --background-color: hsl(200, 10%, 10%);
+  --background2-color: hsl(200 20% 10%);
+  --color1: hsl(200 50% 40%);
+  --color2: hsl(20 50% 40%);
+  --border-radius: 5px;
+}
+
+#playback {
+  position: fixed;
+  display: grid;
+  grid-template-columns: 300px 1fr 200px;
+  top: calc(100vh - var(--playback-height));
+  background-color: var(--background2-color);
+  width: 100%;
+  height: var(--playback-height);
+  border-radius: var(--border-radius);
+  margin-left: 0px;
+  box-shadow: 0 0 30px black;
+  z-index: 10000;
+  & #track-info{
+    display: flex;
+    flex-direction: row;
+    background-color: var(--background2-color);
+
+    & #track-album-art {
+      background-color: var(--background2-color);
+      & img {
+      height: var(--playback-height);
+      }
+    }
+
+    & #tracks {
+      display: flex;
+      flex-direction: column;
+
+      & h3 {
+        margin: 0px;
+        margin-left: 10px;
+        margin-top: 5px;
+      }
+
+      & p {
+        margin: 0px;
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+#home {
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  margin-bottom: 200px;
+  height: 100vh;
+  margin-left: 15px;
+}
+
+
+#navigation{
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  width: var(--nav-width);
+  height: 100vh;
+  border-radius: var(--border-radius);
+  box-shadow: 3px 0px 3px black;
+
+  & #nav-button {
+    display: flex;
+    border-radius: var(--border-radius);
+    height: var(--nav-button-height);
+
+    & .bar {
+      width: 5px;
+      height: var(--nav-button-height);
+      background: var(--color2);
+    }
+
+    & p {
+      padding-left: 20px;
+    }
+  }
+
+  & #nav-button:hover{
+    background-color: var(--background2-color);
+  }
+
+  & #nav-button.active{
+    background-color: var(--background2-color);
+  }
+
+}
+
+#view {
+  display: flex;
+  justify-content: center;
+  margin-left: var(--nav-width);
+  background-color: var(--background2-color);
+  border-radius: var(--border-radius);
+  overflow-y: auto;
+}
+
+#queue {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: -3px 0px 3px black;
+}
+

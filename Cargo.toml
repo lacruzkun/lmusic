@@ -1,0 +1,20 @@
+[package]
+name = "lmusic"
+version = "0.1.0"
+authors = ["lacruzkun <crabraham0@gmail.com>"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+dioxus = { version = "0.7.1", features = [] }
+lofty = "0.23.2"
+rfd = "0.17.2"
+rodio = "0.22.1"
+rusqlite = "0.38.0"
+
+[features]
+default = ["desktop"]
+web = ["dioxus/web"]
+desktop = ["dioxus/desktop"]
+mobile = ["dioxus/mobile"]
