@@ -1,18 +1,19 @@
 :root {
   --playback-height: 100px;
   --nav-width: 150px;
-  --nav-button-height: 50px;
+  --nav-button-height: 40px;
+  --queue-button-height: 60px;
   --background-color: hsl(200, 10%, 10%);
   --background2-color: hsl(200 20% 10%);
   --color1: hsl(200 50% 40%);
   --color2: hsl(20 50% 40%);
-  --border-radius: 5px;
+  --border-radius: 0px;
 }
 
 #playback {
   position: fixed;
   display: grid;
-  grid-template-columns: 300px 1fr 200px;
+  grid-template-columns: 300px 1fr 300px;
   top: calc(100vh - var(--playback-height));
   background-color: var(--background2-color);
   width: 100%;
@@ -21,41 +22,82 @@
   margin-left: 0px;
   box-shadow: 0 0 30px black;
   z-index: 10000;
-  & #track-info{
-    display: flex;
-    flex-direction: row;
-    background-color: var(--background2-color);
-
-    & #track-album-art {
-      background-color: var(--background2-color);
-      & img {
-      height: var(--playback-height);
-      }
-    }
-
-    & #tracks {
+    & #track-info{
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
+      background-color: var(--background2-color);
 
-      & h3 {
-        margin: 0px;
-        margin-left: 10px;
-        margin-top: 5px;
+      & #track-album-art {
+        background-color: var(--background2-color);
+        & img {
+        height: var(--playback-height);
+        }
       }
 
-      & p {
-        margin: 0px;
-        margin-left: 10px;
+      & #tracks {
+        display: flex;
+        flex-direction: column;
+
+        & h3 {
+          margin: 0px;
+          margin-left: 10px;
+          margin-top: 5px;
+        }
+
+        & p {
+          margin: 0px;
+          margin-left: 10px;
+        }
       }
     }
-  }
+
+    & #track-status {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+
+      & #controls {
+        display: flex;
+        gap: 25px;
+        & img {
+          height: 20px;
+        }
+        & .back {
+            transform: rotate(180deg);
+            height: 20px;
+        }
+      }
+
+
+      & .slider {
+        width: 100%;
+        appearance: none;
+        height: 6px;
+        background: #aeaeae;
+        border-radius: 4px;
+        outline: none;
+      } flex-direction: column;
+    }
+
+    #track-control {
+    padding-right: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: end;
+      gap: 20px;
+      & img {
+        height: 20px;
+      }
+    }
 }
 
 #home {
   display: grid;
-  grid-template-columns: 1fr 200px;
-  margin-bottom: 200px;
+  grid-template-columns: 1fr 300px;
   height: 100vh;
+  margin: 0px;
   margin-left: 15px;
 }
 
@@ -73,15 +115,15 @@
     display: flex;
     border-radius: var(--border-radius);
     height: var(--nav-button-height);
+    flex-direction: row;
+    gap: 0;
+    margin: 0;
+    align-items: center;
 
-    & .bar {
-      width: 5px;
-      height: var(--nav-button-height);
-      background: var(--color2);
-    }
 
     & p {
       padding-left: 20px;
+      margin: 0;
     }
   }
 
@@ -91,24 +133,99 @@
 
   & #nav-button.active{
     background-color: var(--background2-color);
+    & .bar {
+      width: 5px;
+      background: var(--color2);
+      height: 100%;
+      margin: 0;
+    }
   }
 
 }
 
 #view {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  /* flex-direction: column; */
+  /* justify-content: center; */
   margin-left: var(--nav-width);
+  grid-template-columns: 1fr;
   background-color: var(--background2-color);
   border-radius: var(--border-radius);
   overflow-y: auto;
+  /* padding-bottom: 200px; */
+  & #artist-image {
+    position: relative;
+    height: 50vh;
+    width: 100%;
+    overflow: hidden;
+      & img {
+      width: 100%;
+      transform: translateY(-50vh);
+
+    }
+  }
+
+  & #artist-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      hsla(200, 20%, 10%, 1) 0%,
+      hsla(200, 20%, 10%, 0) 100%
+    );
+  }
 }
+
 
 #queue {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 10px;
+  padding-bottom: 200px;
   border-radius: var(--border-radius);
   box-shadow: -3px 0px 3px black;
+  overflow-y: auto;
+  & #queue-card{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: var(--border-radius);
+    height: var(--queue-button-height);
+    & #position {
+      margin: 0px;
+      font-weight: bold;
+      margin-left: 10px;
+      margin-right: 10px;
+      color: white;
+
+    }
+    & #title {
+      margin: 0px;
+      padding: 0px;
+      font-weight: bold;
+      /* color: white; */
+    }
+    & .bar {
+      width: 5px;
+      background: none;
+      height: 100%;
+      margin: 0;
+    }
+  }
+
+  & #queue-card:hover {
+    background-color: var(--background2-color);
+  }
+
+  & #queue-card.active {
+    background-color: var(--background2-color);
+    & .bar {
+      width: 5px;
+      background: var(--color2);
+      height: 100%;
+      margin: 0;
+    }
+  }
 }
 
