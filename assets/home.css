@@ -172,6 +172,7 @@
     background: linear-gradient(
       to top,
       hsla(200, 20%, 10%, 1) 0%,
+      hsla(200, 20%, 10%, 0) 50%,
       hsla(200, 20%, 10%, 0) 100%
     );
   }
