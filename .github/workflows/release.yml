@@ -2,6 +2,9 @@ name: build-binary
 
 on: [push]
 
+permission:
+  contents: write
+
 jobs:
   build-appimage:
 
