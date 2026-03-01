@@ -1,0 +1,38 @@
+name: build-binary
+
+on: [push]
+
+jobs:
+  build-appimage:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - run: sudo apt update
+
+      - run: sudo apt install libwebkit2gtk-4.1-dev build-essential \
+              curl \
+              wget \
+              file \
+              libxdo-dev \
+              libssl-dev \
+              libayatana-appindicator3-dev \
+              librsvg2-dev \
+              lld
+
+      - run: cargo install dioxus-cli
+
+      - run: cargo binstall dioxus-cli --force
+
+      - run: cargo install dioxus-cli
+
+      - run: dx bundle --desktop --package-types "appimage"
+
+
+
+
+
