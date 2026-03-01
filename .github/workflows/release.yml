@@ -18,10 +18,6 @@ jobs:
 
       - run: cargo install dioxus-cli
 
-      - run: cargo binstall dioxus-cli --force
-
-      - run: cargo install dioxus-cli
-
       - run: dx bundle --desktop --package-types "appimage"
 
 
