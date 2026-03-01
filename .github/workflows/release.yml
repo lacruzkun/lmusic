@@ -14,16 +14,7 @@ jobs:
 
       - run: sudo apt-get update
 
-      - run: sudo apt-get install libwebkit2gtk-4.1-dev \
-              build-essential \
-              curl \
-              wget \
-              file \
-              libxdo-dev \
-              libssl-dev \
-              libayatana-appindicator3-dev \
-              librsvg2-dev \
-              lld
+      - run: sudo apt-get install libwebkit2gtk-4.1-dev build-essential curl wget file libxdo-dev libssl-dev libayatana-appindicator3-dev librsvg2-dev lld
 
       - run: cargo install dioxus-cli
 
