@@ -20,9 +20,11 @@ jobs:
 
       - name: DX BUILD
         env:
-          RUST_BACKTRACE: 1
-          RUST_LOG: debug
-        run: dx bundle --desktop --package-types "appimage"
+          RUST_BACKTRACE: full
+
+        run: |
+          cargo build
+          dx bundle --desktop --package-types "appimage"
 
 
 
