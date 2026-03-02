@@ -8,6 +8,7 @@ edition = "2021"
 
 [dependencies]
 dioxus = { version = "0.7.1", features = [] }
+dioxus-native = "0.7.3"
 lofty = "0.23.2"
 rfd = "0.17.2"
 rodio = "0.22.1"
