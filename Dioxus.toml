@@ -24,4 +24,4 @@ script = []
 [bundle]
 identifier = ""
 publisher = ""
-icon = ["assets/app-icon.png"]
+icon = ["./icons/icon.ico"]
