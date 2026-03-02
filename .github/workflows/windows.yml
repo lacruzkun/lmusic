@@ -16,23 +16,6 @@ jobs:
       - name: Setup Rust toolchain
         uses: dtolnay/rust-toolchain@stable
 
-      - name: Ensure WiX toolset & WebView2 runtime (via Chocolatey)
-        shell: powershell
-        run: |
-          # install choco packages non-interactively
-          Set-ExecutionPolicy Bypass -Scope Process -Force
-          irm https://community.chocolatey.org/install.ps1 | iex
-          choco feature enable -n allowGlobalConfirmation
-          choco install wixtoolset -y         # required to build MSI
-          choco install microsoft-webview2-runtime -y  # ensure WebView2 runtime is present (optional)
-
-      - name: Verify WiX (diagnostic)
-        shell: pwsh
-        run: |
-          # where.exe shows the path if installed
-          where.exe candle.exe || echo "candle.exe not found in PATH"
-          where.exe light.exe   || echo "light.exe not found in PATH"
-
       - name: Install dioxus CLI
         shell: pwsh
         run: |
