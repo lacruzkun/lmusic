@@ -27,7 +27,7 @@ jobs:
         env:
           RUST_BACKTRACE: full
         run: |
-          dx bundle --release --desktop --package-types "exe"
+          dx bundle --release --desktop
 
       - name: Upload installer to release (on tag)
         if: github.ref_type == 'tag'

@@ -39,12 +39,16 @@ jobs:
           RUST_BACKTRACE: full
 
         run: |
-          dx bundle --release --desktop --package-types "appimage"
+          dx bundle --release --desktop 
 
       - name: Release
 
         uses: softprops/action-gh-release@v2
         if: github.ref_type == 'tag'
         with:
-          files: target/dx/lmusic/bundle/linux/bundle/appimage/Lmusic_0.1.0_amd64.AppImage
+          files: |
+            target/dx/lmusic/bundle/linux/bundle/appimage/*.AppImage
+            target/dx/lmusic/bundle/linux/bundle/appimage_deb/*.AppImage
+            target/dx/lmusic/bundle/linux/bundle/rpm/*.rpm
+            target/dx/lmusic/bundle/linux/bundle/deb/*.deb
 
