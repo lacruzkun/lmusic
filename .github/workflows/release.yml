@@ -15,9 +15,8 @@ jobs:
 
       - uses: dtolnay/rust-toolchain@stable
 
-      - run: sudo apt-get update
-
       - run: |
+          sudo apt-get update
           sudo apt-get install libwebkit2gtk-4.1-dev \
           build-essential \
           curl \
@@ -48,54 +47,4 @@ jobs:
         if: github.ref_type == 'tag'
         with:
           files: target/dx/lmusic/bundle/linux/bundle/appimage/Lmusic_0.1.0_amd64.AppImage
-
-jobs:
-  build-windows:
-    runs-on: windows-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-
-      - name: Setup Rust toolchain
-        uses: dtolnay/rust-toolchain@stable
-
-      - name: Ensure WiX toolset & WebView2 runtime (via Chocolatey)
-        shell: powershell
-        run: |
-          # install choco packages non-interactively
-          Set-ExecutionPolicy Bypass -Scope Process -Force
-          irm https://community.chocolatey.org/install.ps1 | iex
-          choco feature enable -n allowGlobalConfirmation
-          choco install wixtoolset -y         # required to build MSI
-          choco install microsoft-webview2-runtime -y  # ensure WebView2 runtime is present (optional)
-
-      - name: Verify WiX (diagnostic)
-        shell: pwsh
-        run: |
-          # where.exe shows the path if installed
-          where.exe candle.exe || echo "candle.exe not found in PATH"
-          where.exe light.exe   || echo "light.exe not found in PATH"
-
-      - name: Install dioxus CLI
-        shell: pwsh
-        run: |
-          curl -sSL https://dioxus.dev/install.sh | bash
-          dx --version
-
-      - name: Build & bundle (Windows installer)
-        shell: pwsh
-        env:
-          RUST_BACKTRACE: full
-        run: |
-          dx bundle --release --desktop --package-types "exe"
-
-      - name: Upload installer to release (on tag)
-        if: github.ref_type == 'tag'
-        uses: softprops/action-gh-release@v2
-        with:
-          files: |
-            dist/bundle/windows/*.exe
-
-
 
